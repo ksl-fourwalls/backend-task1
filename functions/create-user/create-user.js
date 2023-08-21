@@ -17,7 +17,7 @@ try {
         const results = await collection.find({}).limit(10).toArray();
         return {
             statusCode: 200,
-            body: JSON.stringify(results),
+            body: results// JSON.stringify(results),
         }
 
     } catch (error) {
