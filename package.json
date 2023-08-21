@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "netlify-lambda": "^2.0.16",
+    "node-fetch": "^2.6.13",
     "serverless-http": "^3.2.0"
   },
   "script": {
@@ -10,7 +11,6 @@
   "name": "backend1",
   "version": "1.0.0",
   "main": "hello.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
