@@ -9,20 +9,6 @@ const handler = async (event, context) => {
   if (event.httpMethod !== 'POST') return { statusCode: 400, body: 'Must POST to this function' }
 
 
-try {
-        const database = (await clientPromise).db("mydb");
-        const collection = database.collection("catmouse");
-        // Function logic here ...
-        const results = await collection.find({}).toArray();
-        return {
-            statusCode: 200,
-            body: JSON.stringify(results),
-        }
-
-    } catch (error) {
-        return { statusCode: 500, body: error.toString() }
-    }
-
     // send account information along with the POST
     const { email, full_name: fullName, password } = JSON.parse(event.body)
     if (!email) return { statusCode: 400, body: 'email missing' }
@@ -33,18 +19,21 @@ try {
     // is provided to all Netlify Functions to interact
     // with the Identity API
     const { identity } = context.clientContext
-
   try {
         const database = (await clientPromise).db("mydb");
         const collection = database.collection("catmouse");
 
-        const results = await collection.find({"email":email}).toArray();
+        // result update allowed
 
-        // Function logic here ...
-        const results = await collection.insertOne({"email": email, "password": password, "fullname": fullName});
-        return {
-            statusCode: 200,
-            body: JSON.stringify(results),
+        let results = await collection.find({"email":email}).toArray();
+        if (!results)
+        {
+          // Function logic here ...
+          results = await collection.insertOne({"email": email, "password": password, "fullname": fullName});
+          return {
+              statusCode: 200,
+              body: JSON.stringify(results),
+          }
         }
 
     } catch (error) {
