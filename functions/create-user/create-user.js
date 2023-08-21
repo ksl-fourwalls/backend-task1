@@ -1,11 +1,22 @@
 const fetch = require('node-fetch')
 const { MongoClient } = require("mongodb");
 
-const mongoClient = new MongoClient("mongodb+srv://kushalpce20:9bR2FjTRnVsrmtr@cluster0.6shcbeq.mongodb.net/?retryWrites=true&w=majority");
+const mongoClient = new MongoClient("mongodb+srv://kushalpbd:hh41T9zdebUrURVx@cluster0.tgez674.mongodb.net/?retryWrites=true&w=majority");
+
+const clientPromise = mongoClient.connect();
 
 
 const handler = async (event, context) => {
   if (event.httpMethod !== 'POST') return { statusCode: 400, body: 'Must POST to this function' }
+
+
+try {
+        const database = (await clientPromise).db("mydb");
+        const collection = database.collection("catmouse");
+        // Function logic here ...
+    } catch (error) {
+        return { statusCode: 500, body: error.toString() }
+    }
 
     // send account information along with the POST
     const { email, full_name: fullName, password } = JSON.parse(event.body)
