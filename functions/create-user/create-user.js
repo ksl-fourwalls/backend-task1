@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 const { MongoClient } = require("mongodb");
 
-const mongoClient = new MongoClient("");
+const mongoClient = new MongoClient("mongodb+srv://kushalpce20:9bR2FjTRnVsrmtr@cluster0.6shcbeq.mongodb.net/?retryWrites=true&w=majority");
 
 
 const handler = async (event, context) => {
