@@ -8,11 +8,17 @@ const clientPromise = mongoClient.connect();
 
 
 const handler = async (event) => {
+
+    const { email, password, question} = JSON.parse(event.body);
+    if (!email) return { statusCode: 400, body: 'email missing' }
+    if (!password) return { statusCode: 400, body: 'password missing' }
+    if (!question) return { statusCode: 400, body: 'question' }
+
   try {
         const database = (await clientPromise).db("mydb");
-        const collection = database.collection("catmouse");
+        const collection = database.collection("catquestion");
         // Function logic here ...
-        const results = await collection.find();
+        const results = await collection.insertOne({"email": email, "question": question);
         return {
             statusCode: 200,
             body: JSON.stringify(results),
@@ -22,6 +28,7 @@ const handler = async (event) => {
         return { statusCode: 500, body: error.toString() }
     }
 
+/*
   try {
     const subject = event.queryStringParameters.name || 'World'
     return {
@@ -34,6 +41,7 @@ const handler = async (event) => {
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
   }
+  */
 }
 
 module.exports = { handler }
