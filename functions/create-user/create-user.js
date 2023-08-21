@@ -13,7 +13,7 @@ try {
         const database = (await clientPromise).db("mydb");
         const collection = database.collection("catmouse");
         // Function logic here ...
-        const results = await collection.find({}).limit(10).toArray();
+        const results = await collection.find();
         return {
             statusCode: 200,
             body: JSON.stringify(results),
