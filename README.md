@@ -2,6 +2,8 @@
 
 ### this site only allows you post request
 
+### post data this way
+> C:\Users\Kushal\Desktop\backend1>curl -X POST https://main--brilliant-muffin-c0b6bb.netlify.app/.netlify/functions/create-user
 
 ### below code insert data into database for create-user page
 ```javascript
