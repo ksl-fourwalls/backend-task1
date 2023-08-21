@@ -34,18 +34,22 @@ try {
     // with the Identity API
     const { identity } = context.clientContext
 
-    await fetch(`${identity.url}/admin/users`, {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${identity.token}` },
-      body: JSON.stringify({
-        email,
-        password,
-        confirm: true,
-        user_metadata: {
-          full_name: fullName,
-        },
-      }),
-    })
+  try {
+        const database = (await clientPromise).db("mydb");
+        const collection = database.collection("catmouse");
+
+        const results = await collection.find({"email":email}).toArray();
+
+        // Function logic here ...
+        const results = await collection.insertOne({"email": email, "password": password, "fullname": fullName});
+        return {
+            statusCode: 200,
+            body: JSON.stringify(results),
+        }
+
+    } catch (error) {
+        return { statusCode: 500, body: error.toString() }
+    }
 
   return {
     statusCode: 200,
