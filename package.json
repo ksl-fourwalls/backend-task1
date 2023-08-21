@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "netlify-lambda": "^2.0.16",
+    "serverless-http": "^3.2.0"
+  },
+  "script": {
+    "start": "./node_modules/.bin/netlify-lambda serve src",
+    "build": "./node_modules/.bin/netlify-lambda build src"
+  },
+  "name": "backend1",
+  "version": "1.0.0",
+  "main": "hello.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kushal",
+  "license": "MIT",
+  "description": ""
+}
