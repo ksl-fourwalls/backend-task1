@@ -7,9 +7,6 @@ const mongoClient = new MongoClient("");
 const handler = async (event, context) => {
   if (event.httpMethod !== 'POST') return { statusCode: 400, body: 'Must POST to this function' }
 
-  const realpath = event.path.replace('/.netlify/functions/', '').replace(/\//gim, '')
-  
-    if (realpath === 'create-user') {
     // send account information along with the POST
     const { email, full_name: fullName, password } = JSON.parse(event.body)
     if (!email) return { statusCode: 400, body: 'email missing' }
@@ -33,7 +30,6 @@ const handler = async (event, context) => {
         },
       }),
     })
-  }
 
   return {
     statusCode: 200,
