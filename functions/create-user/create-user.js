@@ -2,7 +2,6 @@ const fetch = require('node-fetch')
 const { MongoClient } = require("mongodb");
 
 const mongoClient = new MongoClient("mongodb+srv://kushalpbd:hh41T9zdebUrURVx@cluster0.tgez674.mongodb.net/?retryWrites=true&w=majority");
-
 const clientPromise = mongoClient.connect();
 
 
@@ -17,7 +16,7 @@ try {
         const results = await collection.find({}).limit(10).toArray();
         return {
             statusCode: 200,
-            body: results// JSON.stringify(results),
+            body: JSON.stringify(results),
         }
 
     } catch (error) {
